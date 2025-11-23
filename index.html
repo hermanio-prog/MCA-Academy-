@@ -1,0 +1,243 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+// Images (local paths supplied by user)
+const LOGO = "/mnt/data/Logotipo.jpg";
+const HERO_IMG = "/mnt/data/cacd7f376d533a837919ffb362b251cc (1).jpg";
+const CAT1 = "/mnt/data/catálogo 1.jpg";
+const CAT2 = "/mnt/data/catálogo 2.jpg";
+const CAT3 = "/mnt/data/catálogo 3.jpg";
+
+// WhatsApp contact for MCA Academy (as provided)
+const MCA_WHATSAPP = "258853915824"; // international format without + sign
+
+export default function MCAAcademySite() {
+  const [form, setForm] = useState({ name: "", course: "", email: "", phone: "", message: "" });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((s) => ({ ...s, [name]: value }));
+  }
+
+  function openWhatsAppWithText(text, phone = MCA_WHATSAPP) {
+    const encoded = encodeURIComponent(text);
+    const url = `https://wa.me/${phone}?text=${encoded}`;
+    window.open(url, "_blank");
+  }
+
+  function handleHeroWhatsapp() {
+    const text = `Olá! 👋 Estou interessado(a) em saber mais sobre os cursos da MCA Academy. Pode me ajudar, por favor?`;
+    openWhatsAppWithText(text);
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    // build message to send via WhatsApp
+    const finalMessage = `Olá! Aqui estão as informações do novo interessado(a):\n\n• Nome: ${form.name || "-"}\n• Curso de interesse: ${form.course || "-"}\n• E-mail: ${form.email || "-"}\n• WhatsApp: ${form.phone || "-"}\n• Mensagem adicional: ${form.message || "-"}\n\nGostaria de receber mais informações sobre este curso. Obrigado(a)!`;
+    openWhatsAppWithText(finalMessage);
+  }
+
+  return (
+    <div className="min-h-screen font-sans text-gray-800">
+      {/* HERO */}
+      <header className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-blue-900 opacity-95" />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 lg:py-28">
+          <div className="flex items-center justify-between">
+            <img src={LOGO} alt="MCA Academy" className="w-40 md:w-48" />
+            <div className="text-white text-right">
+              <p className="text-sm">+258 853 915 824 | Comercial.mcaacademy@gmail.com</p>
+              <p className="mt-1 text-xs">São + de 3000 estudantes • + de 20 professores • + de 8 anos</p>
+            </div>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <h1 className="text-white text-4xl md:text-5xl font-bold leading-tight">"O conhecimento é a chave do sucesso"</h1>
+              <p className="mt-4 text-white/90 text-lg max-w-xl">A MCA Academy transforma carreiras com cursos práticos, mentorias e foco no mercado. Aprenda com experts e prepare-se para o futuro. Educação que conecta você ao sucesso.</p>
+
+              <div className="mt-8 flex gap-4">
+                <button onClick={handleHeroWhatsapp} className="px-5 py-3 bg-white text-blue-900 font-semibold rounded-lg shadow-md hover:scale-105 transform transition">
+                  Falar pelo WhatsApp
+                </button>
+                <a href="#cursos" className="px-5 py-3 border border-white text-white rounded-lg hover:bg-white/10 transition">Ver Cursos</a>
+              </div>
+
+              <div className="mt-6 text-sm text-white/80">E-mail: Comercial.mcaacademy@gmail.com</div>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }} className="rounded-xl overflow-hidden shadow-2xl">
+              <img src={HERO_IMG} alt="Destaque" className="w-full object-cover h-80 md:h-96" />
+            </motion.div>
+          </div>
+        </div>
+      </header>
+
+      {/* COURSES SECTION */}
+      <main className="max-w-6xl mx-auto px-6 py-16">
+        <section id="cursos">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Cursos Disponíveis</h2>
+            <p className="text-sm text-gray-500">Organizados por áreas para facilitar a sua escolha</p>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Administration */}
+            <motion.div whileHover={{ y: -6 }} className="bg-white rounded-xl p-6 shadow">
+              <h3 className="font-semibold text-lg">Administração, Educação & Gestão</h3>
+              <ul className="mt-3 text-sm space-y-2 text-gray-700">
+                <li>• Secretariado e Administração de Escritórios</li>
+                <li>• Educação de Infância e Gestão Infantil</li>
+                <li>• Gestão de Recursos Humanos</li>
+                <li>• Gestão de Empresas e Projectos</li>
+              </ul>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -6 }} className="bg-white rounded-xl p-6 shadow">
+              <h3 className="font-semibold text-lg">Segurança, Indústria & Electricidade</h3>
+              <ul className="mt-3 text-sm space-y-2 text-gray-700">
+                <li>• Higiene e Segurança no Trabalho</li>
+                <li>• Electricidade Instaladora e Reparação de Eletrodomésticos</li>
+                <li>• Electricidade Instaladora e Sistemas Fotovoltaicos</li>
+                <li>• Electricidade Industrial</li>
+              </ul>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -6 }} className="bg-white rounded-xl p-6 shadow">
+              <h3 className="font-semibold text-lg">Informática, Tecnologia & Design</h3>
+              <ul className="mt-3 text-sm space-y-2 text-gray-700">
+                <li>• Informática Profissional e Administrativa</li>
+                <li>• Informática e Segurança Electrónica</li>
+                <li>• Design Gráfico e Tecnologias</li>
+              </ul>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -6 }} className="bg-white rounded-xl p-6 shadow">
+              <h3 className="font-semibold text-lg">Contabilidade & Finanças</h3>
+              <ul className="mt-3 text-sm space-y-2 text-gray-700">
+                <li>• Contabilidade e Primavera</li>
+                <li>• Contabilidade e Gestão de Caixa</li>
+                <li>• Gestão Bancária e Microcrédito</li>
+              </ul>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -6 }} className="bg-white rounded-xl p-6 shadow">
+              <h3 className="font-semibold text-lg">Idiomas Internacionais</h3>
+              <ul className="mt-3 text-sm space-y-2 text-gray-700">
+                <li>• Inglês (Básico, Intermédio, Prático e Avançado)</li>
+                <li>• Francês (Básico, Intermédio, Prático e Avançado)</li>
+                <li>• Mandarim (Básico, Intermédio, Prático e Avançado)</li>
+              </ul>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -6 }} className="bg-white rounded-xl p-6 shadow">
+              <h3 className="font-semibold text-lg">Marketing & Estratégia Digital</h3>
+              <ul className="mt-3 text-sm space-y-2 text-gray-700">
+                <li>• Marketing Digital e Gestão de Redes Sociais</li>
+                <li>• Tráfego Pago</li>
+              </ul>
+            </motion.div>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.img whileHover={{ scale: 1.03 }} src={CAT1} alt="Catalogo 1" className="w-full h-44 object-cover rounded-lg shadow" />
+            <motion.img whileHover={{ scale: 1.03 }} src={CAT2} alt="Catalogo 2" className="w-full h-44 object-cover rounded-lg shadow" />
+            <motion.img whileHover={{ scale: 1.03 }} src={CAT3} alt="Catalogo 3" className="w-full h-44 object-cover rounded-lg shadow" />
+          </div>
+        </section>
+
+        {/* ABOUT / MISSION / VISION / VALUES */}
+        <section className="mt-16 bg-white rounded-xl p-8 shadow">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="md:col-span-2">
+              <h3 className="text-xl font-semibold">Sobre Nós</h3>
+              <p className="mt-3 text-sm text-gray-700">
+                A <strong>MCA Academy</strong> é uma instituição de formação dedicada à formação profissional prática, acessível e alinhada com as exigências do mercado de trabalho. Com mais de 8 anos de experiência, já capacitámos mais de 3000 estudantes e contamos com mais de 20 professores especializados.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold">Missão</h4>
+              <p className="text-sm text-gray-700 mt-2">Proporcionar formação de qualidade, prática e orientada ao mercado, capacitando os nossos estudantes com competências atualizadas que os tornem profissionais preparados e competitivos.</p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold">Visão</h4>
+              <p className="text-sm text-gray-700 mt-2">Ser referência nacional em educação profissional, reconhecida pela excelência dos cursos e pela transformação que geramos nos formandos.</p>
+            </div>
+
+            <div className="md:col-span-2 mt-6 md:mt-0">
+              <h4 className="font-semibold">Valores</h4>
+              <ul className="text-sm text-gray-700 mt-2 space-y-1">
+                <li>• Compromisso</li>
+                <li>• Profissionalismo</li>
+                <li>• Inovação</li>
+                <li>• Acessibilidade</li>
+                <li>• Transformação</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT / FORM */}
+        <section className="mt-16" id="contact">
+          <div className="bg-white rounded-xl p-8 shadow">
+            <h3 className="text-xl font-semibold">Inscreva-se / Peça informações</h3>
+            <p className="text-sm text-gray-600 mt-2">Preencha o formulário abaixo e as informações serão enviadas diretamente para o WhatsApp da MCA Academy.</p>
+
+            <form onSubmit={handleFormSubmit} className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input required name="name" value={form.name} onChange={handleChange} placeholder="Nome completo" className="p-3 border rounded" />
+              <input required name="course" value={form.course} onChange={handleChange} placeholder="Curso que deseja" className="p-3 border rounded" />
+              <input name="email" value={form.email} onChange={handleChange} placeholder="Email" className="p-3 border rounded" />
+              <input name="phone" value={form.phone} onChange={handleChange} placeholder="WhatsApp (ex: +258 8...)" className="p-3 border rounded" />
+              <textarea name="message" value={form.message} onChange={handleChange} placeholder="Mensagem (opcional)" className="p-3 border rounded md:col-span-2" />
+
+              <div className="md:col-span-2 flex gap-3 items-center">
+                <button type="submit" className="px-5 py-3 bg-blue-900 text-white rounded-lg font-semibold shadow hover:scale-105 transform transition">Enviar e abrir WhatsApp</button>
+
+                <button type="button" onClick={() => {
+                  // quick prefill message
+                  const t = `Olá! 👋 Estou interessado(a) em saber mais sobre os cursos da MCA Academy. Pode me ajudar, por favor?`;
+                  openWhatsAppWithText(t);
+                }} className="px-4 py-2 border rounded">Abrir WhatsApp Agora</button>
+
+                <div className="text-sm text-gray-500">Ou contacte-nos pelo WhatsApp: <button onClick={() => openWhatsAppWithText('Olá! 👋')} className="text-blue-700 underline">+258 853 915 824</button></div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      {/* FOOTER */}
+      <footer className="bg-gradient-to-t from-blue-900 to-red-500 text-white mt-12">
+        <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-start gap-6">
+          <div>
+            <img src={LOGO} alt="MCA Academy" className="w-36" />
+            <p className="mt-4 text-sm">Comercial.mcaacademy@gmail.com • +258 853 915 824</p>
+            <p className="mt-2 text-sm">São + de 3000 estudantes • + de 20 professores • + de 8 anos de ensino</p>
+          </div>
+
+          <div className="text-sm">
+            <h5 className="font-semibold">Contacto</h5>
+            <p className="mt-2">Email: Comercial.mcaacademy@gmail.com</p>
+            <p className="mt-1">WhatsApp: +258 853 915 824</p>
+          </div>
+
+          <div className="text-sm">
+            <h5 className="font-semibold">Criado por</h5>
+            <p className="mt-2">Hermanio Cuamba</p>
+            <p>hermaniocuamba2@gmail.com</p>
+            <p>+258 855 943 975</p>
+          </div>
+        </div>
+
+        <div className="text-center text-white/80 text-xs py-3">© MCA Academy — Todos os direitos reservados</div>
+      </footer>
+
+      {/* Floating WhatsApp Button */}
+      <motion.button whileTap={{ scale: 0.95 }} onClick={handleHeroWhatsapp} className="fixed right-6 bottom-6 bg-green-500 shadow-lg rounded-full p-4 border-4 border-white">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.478A11.911 11.911 0 0012.001 0C5.373 0 .001 5.373.001 12 0 13.99.371 15.89 1.077 17.63L0 24l6.53-1.068A11.924 11.924 0 0012 24c6.627 0 12-5.373 12-12 0-1.995-.447-3.874-1.48-5.522zM12 22.001c-.971 0-1.926-.134-2.835-.397L4.8 21.263l.55-3.127A9.916 9.916 0 012 12c0-5.523 4.477-10 10-10 5.523 0 10 4.477 10 10s-4.477 10-10 10z"/></svg>
+      </motion.button>
+    </div>
+  );
+}
