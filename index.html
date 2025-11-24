@@ -4,380 +4,310 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MCA Academy — Formação Profissional</title>
-  <meta name="description" content="MCA Academy: Cursos técnicos práticos, mentorias e formação orientada para o mercado." />
-
+  <meta name="description" content="MCA Academy: cursos técnicos práticos, mentorias e formação orientada para o mercado." />
   <style>
+    /* ========== Root / Theme ========== */
     :root{
-      --primary-from: #e53935; /* vermelho */
-      --primary-to: #0b3b8a;   /* azul escuro */
-      --accent: #ffffff;
-      --card-bg: #ffffff;
+      --red: #E53935;
+      --blue: #0B3B8A;
+      --bg: #f6f8fb;
+      --card: #ffffff;
       --muted: #6b7280;
-      --wa-green: #25D366;
-      --max-width: 1100px;
+      --accent: #ffffff;
+      --wa: #25D366;
+      --max: 1100px;
       --radius: 14px;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    html,body{height:100%; margin:0; background:#f8fafc; color:#111827;}
+    html,body{height:100%; margin:0; background:var(--bg); color:#0b1220; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
     a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:28px;}
 
-    /* container */
-    .container{max-width:var(--max-width); margin:0 auto; padding:28px;}
+    /* ========== Top navigation (minimal) ========== */
+    nav.top{
+      display:flex; justify-content:space-between; align-items:center; gap:16px; padding:12px 0;
+    }
+    nav .brand{display:flex; align-items:center; gap:12px}
+    nav img.logo{height:56px; width:auto; display:block; border-radius:8px; background:linear-gradient(90deg,var(--accent),var(--accent)); padding:4px}
 
-    /* Header/Hero */
+    nav .links{display:flex; gap:12px; align-items:center}
+    .nav-link{font-weight:600; color:var(--muted); font-size:14px}
+    .nav-cta{padding:8px 12px; border-radius:10px; background:linear-gradient(90deg,var(--accent),var(--accent)); color:var(--blue); font-weight:700; box-shadow:0 10px 30px rgba(11,59,138,0.08);}
+
+    /* ========== Hero ========== */
     header.hero{
-      position:relative;
+      margin-top:6px; border-radius:18px; overflow:hidden; position:relative;
+      background:linear-gradient(135deg,var(--red) 0%, var(--blue) 100%);
       color:var(--accent);
-      overflow:hidden;
-      border-radius:0 0 28px 28px;
+      padding:40px;
     }
-    header.hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background:linear-gradient(135deg, var(--primary-from) 0%, var(--primary-to) 100%);
-      z-index:0;
-      filter:contrast(1.05);
-    }
-    .hero-inner{position:relative; z-index:2; display:flex; gap:28px; align-items:center; padding:36px; max-width:var(--max-width); margin:0 auto;}
-    .logo{width:160px; flex:0 0 160px;}
-    .hero-content{flex:1; padding:18px 8px;}
-    .kicker{font-size:13px; opacity:0.95}
-    .headline{font-size:34px; line-height:1.05; font-weight:800; margin:12px 0;}
-    .sub{opacity:0.95; max-width:680px; font-size:16px; margin-bottom:18px;}
-    .hero-cta{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+    .hero-inner{display:flex; gap:28px; align-items:center; max-width:var(--max); margin:0 auto;}
+    .hero-left{flex:1; min-width:0}
+    .hero-right{flex:0 0 360px; display:flex; justify-content:center; align-items:center}
+    .headline{font-size:32px; line-height:1.03; font-weight:800; margin:0 0 12px;}
+    .lead{opacity:0.95; margin:0 0 18px; font-size:15px; max-width:620px}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap}
     .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:12px 18px; border-radius:12px; cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease;
-      border:0; font-weight:700;
+      border:0; cursor:pointer; border-radius:12px; padding:10px 16px; font-weight:700; display:inline-flex; align-items:center; gap:10px;
+      transition:transform .16s ease, box-shadow .16s ease;
     }
-    .btn:active{transform:translateY(1px) scale(.995)}
-    .btn-primary{background:var(--accent); color:var(--primary-to); box-shadow:0 8px 30px rgba(11,59,138,.12);}
-    .btn-ghost{background:transparent; color:rgba(255,255,255,.95); border:1px solid rgba(255,255,255,.12)}
-    .hero-photo{
-      width:420px; max-width:40%; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(2,6,23,.35);
-      transform-origin:center; will-change:transform;
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:var(--accent); color:var(--blue); box-shadow:0 12px 30px rgba(2,6,23,0.08)}
+    .btn-outline{background:transparent; color:rgba(255,255,255,0.95); border:1px solid rgba(255,255,255,0.12)}
+
+    /* micro cards under hero */
+    .stats{display:flex; gap:12px; margin-top:18px; flex-wrap:wrap}
+    .stat{background:rgba(255,255,255,0.08); padding:10px 12px; border-radius:10px; font-weight:700; font-size:13px}
+
+    /* hero right: simple logo showcase (minimalist) */
+    .logo-card{background:rgba(255,255,255,0.06); padding:18px; border-radius:12px; display:flex; align-items:center; justify-content:center; width:100%; height:220px; box-shadow:inset 0 -20px 40px rgba(0,0,0,0.06)}
+    .logo-card img{max-width:80%; max-height:80%; display:block; filter:drop-shadow(0 8px 30px rgba(2,6,23,0.18))}
+
+    /* ========== Main sections ========== */
+    main{max-width:var(--max); margin:28px auto; padding:0 18px;}
+    .section{background:var(--card); border-radius:12px; padding:20px; box-shadow:0 10px 30px rgba(2,6,23,0.04); margin-bottom:18px}
+    h2.section-title{margin:0 0 10px; font-size:20px}
+
+    /* Courses grid (minimal cards) */
+    .courses-grid{display:grid; gap:12px; grid-template-columns:1fr;}
+    @media(min-width:860px){ .courses-grid{grid-template-columns:repeat(3,1fr);} }
+
+    .course-card{padding:16px; border-radius:10px; background:linear-gradient(180deg,#fff,#fbfdff); border:1px solid #eef2f8; transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s; cursor:default}
+    .course-card:hover{transform:translateY(-8px); box-shadow:0 18px 40px rgba(2,6,23,0.08)}
+    .course-card h3{margin:0 0 6px; font-size:16px}
+    .course-card p{margin:0; color:var(--muted); font-size:13px}
+
+    /* about grid */
+    .about-grid{display:grid; gap:12px; grid-template-columns:1fr;}
+    @media(min-width:900px){ .about-grid{grid-template-columns:2fr 1fr;} }
+
+    /* form */
+    .lead-form{display:grid; gap:10px}
+    .input{padding:12px 14px; border-radius:10px; border:1px solid #e6e9ef; font-size:14px; outline:none}
+    .input:focus{box-shadow:0 8px 22px rgba(11,59,138,0.06); border-color:var(--blue)}
+    .form-row{display:flex; gap:10px}
+    .form-row .input{flex:1}
+    .form-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:6px}
+
+    /* footer */
+    footer.site{padding:20px; text-align:center; color:var(--muted); font-size:14px}
+    footer a.small-link{color:var(--muted); font-weight:700}
+
+    /* floating whatsapp */
+    .fab{
+      position:fixed; right:18px; bottom:18px; z-index:999; width:64px; height:64px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+      background:var(--wa); box-shadow:0 12px 40px rgba(37,211,102,0.14); border:4px solid #fff; cursor:pointer; transition:transform .16s;
+      animation:fabPulse 2.6s infinite;
     }
+    @keyframes fabPulse{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
 
-    /* stats bar */
-    .stats{display:flex; gap:18px; margin-top:12px; font-size:13px; opacity:.95; flex-wrap:wrap;}
-
-    /* Courses */
-    section.courses{padding:46px 20px; max-width:var(--max-width); margin:0 auto;}
-    .courses-head{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px;}
-    .grid{display:grid; gap:16px; grid-template-columns:repeat(1,1fr);}
-    @media(min-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
-    @media(min-width:1024px){ .grid{grid-template-columns:repeat(3,1fr);} }
-
-    .card{
-      background:var(--card-bg); padding:18px; border-radius:12px; box-shadow:0 6px 20px rgba(2,6,23,.06);
-      transition:transform .25s cubic-bezier(.2,.9,.3,1), box-shadow .25s;
-      cursor:default;
-    }
-    .card:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(2,6,23,.12); }
-
-    .card h3{margin:0 0 8px 0; font-size:18px;}
-    .card ul{margin:0; padding-left:16px; color:var(--muted); font-size:14px;}
-
-    /* gallery */
-    .gallery{display:grid; grid-template-columns:repeat(1,1fr); gap:12px; margin-top:18px;}
-    @media(min-width:720px){ .gallery{grid-template-columns:repeat(3,1fr);} }
-    .gallery img{width:100%; height:160px; object-fit:cover; border-radius:10px; box-shadow:0 10px 30px rgba(2,6,23,.08); transition:transform .25s}
-    .gallery img:hover{transform:scale(1.03)}
-
-    /* About / Mission / Values */
-    .about{padding:28px; background:var(--card-bg); border-radius:12px; margin-top:22px; box-shadow:0 10px 30px rgba(2,6,23,.04)}
-    .about-grid{display:grid; grid-template-columns:repeat(1,1fr); gap:18px;}
-    @media(min-width:900px){ .about-grid{grid-template-columns:2fr 1fr 1fr;} }
-
-    /* Form */
-    .form-wrap{margin-top:26px; background:var(--card-bg); padding:20px; border-radius:12px; box-shadow:0 10px 30px rgba(2,6,23,.04)}
-    form .row{display:flex; gap:12px; flex-direction:column;}
-    @media(min-width:720px){ form .row{flex-direction:row}}
-    input, textarea{
-      width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e6e9ef; font-size:15px;
-      outline: none; transition:box-shadow .12s, border-color .12s;
-    }
-    input:focus, textarea:focus{box-shadow:0 6px 18px rgba(11,59,138,.08); border-color:var(--primary-to)}
-    textarea{min-height:100px; resize:vertical}
-
-    .form-actions{display:flex; gap:12px; align-items:center; margin-top:12px; flex-wrap:wrap}
-    .small{font-size:13px; color:var(--muted)}
-
-    /* Footer */
-    footer.site-footer{margin-top:36px; padding:28px; color:var(--accent); background:linear-gradient(180deg,var(--primary-to),var(--primary-from)); border-radius:12px}
-    footer .footer-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start;}
-    @media(min-width:900px){ footer .footer-grid{grid-template-columns:1fr 1fr 1fr}}
-
-    /* Floating WhatsApp button */
-    .fab-wa{
-      position:fixed; right:22px; bottom:22px; z-index:999; width:64px; height:64px; border-radius:999px;
-      display:flex; align-items:center; justify-content:center; background:var(--wa-green); box-shadow:0 12px 40px rgba(37,211,102,.18);
-      border:4px solid #fff; cursor:pointer; transform-origin:center;
-      animation:fabPulse 2.4s infinite;
-    }
-    @keyframes fabPulse{
-      0%{ transform:scale(1); }
-      50%{ transform:scale(1.06); }
-      100%{ transform:scale(1); }
-    }
-
-    /* small animations */
-    .fade-up{opacity:0; transform:translateY(12px); animation:fadeUp .7s forwards; animation-delay:.14s}
-    @keyframes fadeUp{ to{ opacity:1; transform:none } }
+    /* small animations: fade/slide-in */
+    .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease;}
+    .reveal.visible{opacity:1; transform:none;}
 
     /* responsive tweaks */
-    @media(max-width:720px){
-      .hero-inner{flex-direction:column; text-align:center}
-      .hero-photo{width:100%; max-width:520px}
-      .logo{width:140px}
-      .headline{font-size:26px}
+    @media(max-width:880px){
+      .hero-inner{flex-direction:column; align-items:flex-start}
+      .hero-right{width:100%; order:-1}
+      .logo-card{height:160px}
+      .headline{font-size:24px}
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-inner container">
-      <img class="logo" src="/mnt/data/Logotipo.jpg" alt="Logotipo MCA Academy" />
+  <div class="container">
 
-      <div class="hero-content">
-        <div class="kicker">Comercial.mcaacademy@gmail.com · +258 853 915 824</div>
-        <h1 class="headline">"O conhecimento é a chave do sucesso"</h1>
-        <p class="sub">A MCA Academy transforma carreiras com cursos práticos, mentorias e foco no mercado. Aprenda com experts e prepare-se para o futuro. Educação que conecta você ao sucesso.</p>
-
-        <div class="hero-cta">
-          <button class="btn btn-primary" id="hero-wa">Falar pelo WhatsApp</button>
-          <a class="btn btn-ghost" href="#cursos">Ver Cursos</a>
-        </div>
-
-        <div class="stats" aria-hidden="true" style="margin-top:14px">
-          <div>📚 <strong>+3.000</strong> estudantes</div>
-          <div>👩‍🏫 <strong>+20</strong> professores</div>
-          <div>⏳ <strong>+8</strong> anos de ensino</div>
+    <!-- NAV -->
+    <nav class="top" aria-label="Principal">
+      <div class="brand">
+        <img class="logo" src="/mnt/data/Logotipo.jpg" alt="Logotipo MCA Academy">
+        <div style="display:flex; flex-direction:column; line-height:1">
+          <strong style="font-size:15px">MCA Academy</strong>
+          <small style="color:var(--muted); font-size:12px">Formação técnica e profissional</small>
         </div>
       </div>
 
-      <div class="hero-photo" aria-hidden="true">
-        <img src="/mnt/data/cacd7f376d533a837919ffb362b251cc (1).jpg" alt="Imagem destaque" style="width:100%; height:100%; object-fit:cover; display:block">
+      <div class="links" aria-hidden="true">
+        <a class="nav-link" href="#cursos">Cursos</a>
+        <a class="nav-link" href="#sobre">Sobre</a>
+        <button class="nav-cta" id="navContactBtn">Contacto</button>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" role="banner">
+    <div class="hero-inner container">
+      <div class="hero-left">
+        <div class="kicker" style="opacity:0.95; font-weight:700">Comercial.mcaacademy@gmail.com · +258 853 915 824</div>
+        <h1 class="headline">"O conhecimento é a chave do sucesso"</h1>
+        <p class="lead">A MCA Academy transforma carreiras com cursos práticos, mentorias e foco no mercado. Aprenda com experts e prepare-se para o futuro — educação que conecta você ao sucesso.</p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="ctaWhats">Falar pelo WhatsApp</button>
+          <a class="btn btn-outline" href="#cursos">Ver Cursos</a>
+        </div>
+
+        <div class="stats" style="margin-top:16px">
+          <div class="stat">📚 <strong>+3.000</strong> estudantes</div>
+          <div class="stat">👩‍🏫 <strong>+20</strong> professores</div>
+          <div class="stat">⏳ <strong>+8</strong> anos</div>
+        </div>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <div class="logo-card" title="Logotipo MCA Academy">
+          <img src="/mnt/data/Logotipo.jpg" alt="Logotipo MCA">
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- COURSES -->
-  <section id="cursos" class="courses">
-    <div class="container">
-      <div class="courses-head">
-        <h2 style="margin:0; font-size:22px">Cursos Técnicos Profissionais</h2>
-        <p class="small">Organizados por áreas — escolha a sua formação</p>
-      </div>
+  <!-- MAIN -->
+  <main>
 
-      <div class="grid" style="margin-top:16px">
-        <div class="card fade-up">
+    <!-- COURSES -->
+    <section id="cursos" class="section reveal">
+      <h2 class="section-title">Cursos Técnicos Profissionais</h2>
+      <p style="margin-top:6px; color:var(--muted); font-size:14px">Organizados por áreas para facilitar a sua escolha.</p>
+
+      <div style="height:12px"></div>
+
+      <div class="courses-grid">
+        <div class="course-card">
           <h3>Administração, Educação & Gestão</h3>
-          <ul>
-            <li>Secretariado e Administração de Escritórios</li>
-            <li>Educação de Infância e Gestão Infantil</li>
-            <li>Gestão de Recursos Humanos</li>
-            <li>Gestão de Empresas e Projectos</li>
-          </ul>
+          <p>Secretariado, Educação de Infância, Gestão de RH, Gestão de Empresas e Projectos.</p>
         </div>
 
-        <div class="card fade-up" style="animation-delay:.08s">
+        <div class="course-card">
           <h3>Segurança, Indústria & Electricidade</h3>
-          <ul>
-            <li>Higiene e Segurança no Trabalho</li>
-            <li>Electricidade Instaladora e Reparação de Eletrodomésticos</li>
-            <li>Electricidade Instaladora e Sistemas Fotovoltaicos</li>
-            <li>Electricidade Industrial</li>
-          </ul>
+          <p>Higiene e Segurança, Electricidade Instaladora, Sistemas Fotovoltaicos, Electricidade Industrial.</p>
         </div>
 
-        <div class="card fade-up" style="animation-delay:.16s">
+        <div class="course-card">
           <h3>Informática, Tecnologia & Design</h3>
-          <ul>
-            <li>Informática Profissional e Administrativa</li>
-            <li>Informática e Segurança Electrónica</li>
-            <li>Design Gráfico e Tecnologias</li>
-          </ul>
+          <p>Informática Profissional, Segurança Electrónica e Design Gráfico.</p>
         </div>
 
-        <div class="card fade-up" style="animation-delay:.22s">
+        <div class="course-card">
           <h3>Contabilidade & Finanças</h3>
-          <ul>
-            <li>Contabilidade e Primavera</li>
-            <li>Contabilidade e Gestão de Caixa</li>
-            <li>Gestão Bancária e Microcrédito</li>
-          </ul>
+          <p>Contabilidade e Primavera, Gestão de Caixa, Gestão Bancária e Microcrédito.</p>
         </div>
 
-        <div class="card fade-up" style="animation-delay:.28s">
-          <h3>Idiomas Internacionais</h3>
-          <ul>
-            <li>Inglês (Básico, Intermédio, Prático e Avançado)</li>
-            <li>Francês (Básico, Intermédio, Prático e Avançado)</li>
-            <li>Mandarim (Básico, Intermédio, Prático e Avançado)</li>
-          </ul>
+        <div class="course-card">
+          <h3>Idiomas</h3>
+          <p>Inglês, Francês e Mandarim — todos os níveis.</p>
         </div>
 
-        <div class="card fade-up" style="animation-delay:.34s">
-          <h3>Marketing & Estratégia Digital</h3>
-          <ul>
-            <li>Marketing Digital e Gestão de Redes Sociais</li>
-            <li>Tráfego Pago</li>
-          </ul>
+        <div class="course-card">
+          <h3>Marketing & Digital</h3>
+          <p>Marketing Digital, Gestão de Redes e Tráfego Pago.</p>
         </div>
       </div>
+    </section>
 
-      <!-- gallery -->
-      <div class="gallery" style="margin-top:18px">
-        <img src="/mnt/data/catálogo 1.jpg" alt="Catálogo 1">
-        <img src="/mnt/data/catálogo 2.jpg" alt="Catálogo 2">
-        <img src="/mnt/data/catálogo 3.jpg" alt="Catálogo 3">
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT / MISSION / VISION / VALUES -->
-  <section class="container" aria-labelledby="sobre">
-    <div class="about about-grid">
-      <div>
-        <h3 id="sobre">Sobre Nós</h3>
-        <p style="color:var(--muted); margin-top:8px">
-          A <strong>MCA Academy</strong> é uma instituição de formação dedicada à formação profissional prática, acessível e alinhada com as exigências do mercado de trabalho. Com mais de <strong>8 anos</strong> de experiência, já capacitámos <strong>mais de 3000 estudantes</strong> e contamos com <strong>mais de 20 professores</strong> especializados.
-        </p>
-      </div>
-
-      <div>
-        <h4>Missão</h4>
-        <p class="small">Proporcionar formação de qualidade, prática e orientada ao mercado, capacitando os nossos estudantes com competências atualizadas que os tornem profissionais preparados e competitivos.</p>
-      </div>
-
-      <div>
-        <h4>Visão</h4>
-        <p class="small">Ser referência nacional em educação profissional, reconhecida pela excelência dos cursos e pela transformação que geramos nos formandos.</p>
-      </div>
-
-      <div style="grid-column:1/-1">
-        <h4>Valores</h4>
-        <p class="small" style="margin-top:6px">Compromisso · Profissionalismo · Inovação · Acessibilidade · Transformação</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT / FORM -->
-  <section class="container" style="margin-top:18px">
-    <div class="form-wrap">
-      <h3>Inscreva-se / Peça informações</h3>
-      <p class="small" style="margin-top:6px">Preencha o formulário abaixo e as informações serão enviadas diretamente para o WhatsApp da MCA Academy.</p>
-
-      <form id="leadForm" style="margin-top:12px">
-        <div class="row">
-          <input id="name" name="name" required placeholder="Nome completo" />
-          <input id="course" name="course" required placeholder="Curso que deseja" />
+    <!-- ABOUT / MISSION / VISION / VALUES -->
+    <section id="sobre" class="section reveal">
+      <div class="about-grid">
+        <div>
+          <h2 class="section-title">Sobre a MCA Academy</h2>
+          <p style="color:var(--muted); margin-top:8px">
+            A <strong>MCA Academy</strong> é uma instituição de formação prática e orientada para o mercado. Com mais de <strong>8 anos</strong>, já capacitámos mais de <strong>3.000 estudantes</strong> com o apoio de uma equipa de mais de <strong>20 professores</strong>. Nosso foco é transformar carreiras através de conhecimento aplicável.
+          </p>
         </div>
 
-        <div class="row" style="margin-top:10px">
-          <input id="email" name="email" placeholder="Email (opcional)" />
-          <input id="phone" name="phone" placeholder="WhatsApp (ex: +258 8...)" />
+        <div>
+          <h3 style="margin-top:0">Missão</h3>
+          <p class="small" style="color:var(--muted)">Proporcionar formação de qualidade, prática e orientada ao mercado, capacitando estudantes para oportunidades reais.</p>
+
+          <h3 style="margin-top:12px">Visão</h3>
+          <p class="small" style="color:var(--muted)">Ser referência nacional em educação profissional, reconhecida pela excelência e impacto social.</p>
+
+          <h3 style="margin-top:12px">Valores</h3>
+          <p class="small" style="color:var(--muted)">Compromisso · Profissionalismo · Inovação · Acessibilidade · Transformação</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FORM -->
+    <section id="contact" class="section reveal" aria-label="Contacto">
+      <h2 class="section-title">Inscreva-se / Peça Informações</h2>
+      <p style="color:var(--muted); margin-top:6px">Preencha o formulário — os dados serão enviados diretamente para o WhatsApp da MCA Academy.</p>
+
+      <form id="leadForm" class="lead-form" style="margin-top:12px">
+        <div class="form-row">
+          <input id="name" class="input" name="name" required placeholder="Nome completo">
+          <input id="course" class="input" name="course" required placeholder="Curso que deseja">
         </div>
 
-        <div style="margin-top:10px">
-          <textarea id="message" name="message" placeholder="Mensagem adicional (opcional)"></textarea>
+        <div class="form-row">
+          <input id="email" class="input" name="email" placeholder="E-mail (opcional)">
+          <input id="phone" class="input" name="phone" placeholder="WhatsApp (ex: +258 8...)">
         </div>
+
+        <textarea id="message" class="input" name="message" placeholder="Mensagem adicional (opcional)"></textarea>
 
         <div class="form-actions">
-          <button id="submitBtn" type="submit" class="btn btn-primary">Enviar e abrir WhatsApp</button>
-          <button id="openWaBtn" type="button" class="btn btn-ghost">Abrir WhatsApp agora</button>
-          <div class="small">Ou contacte-nos: <a href="#" id="contactWa">+258 853 915 824</a></div>
+          <button type="submit" class="btn btn-primary">Enviar e abrir WhatsApp</button>
+          <button type="button" id="openNow" class="btn btn-outline">Abrir WhatsApp</button>
+          <div style="margin-left:auto; color:var(--muted); font-size:13px">Ou contacte-nos: <a class="small-link" href="#" id="quickContact">+258 853 915 824</a></div>
         </div>
       </form>
+    </section>
 
-    </div>
-  </section>
+  </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer container">
-    <div class="footer-grid">
-      <div>
-        <img src="/mnt/data/Logotipo.jpg" alt="Logo" style="width:140px; display:block; margin-bottom:10px;">
-        <div class="small">Comercial.mcaacademy@gmail.com · +258 853 915 824</div>
-        <div class="small" style="margin-top:6px">São + de 3000 estudantes · + de 20 professores · + de 8 anos de ensino</div>
+  <!-- Footer -->
+  <footer class="site" role="contentinfo">
+    <div style="max-width:var(--max); margin:0 auto; padding:22px;">
+      <div style="display:flex; flex-direction:column; gap:8px; align-items:center;">
+        <img src="/mnt/data/Logotipo.jpg" alt="Logotipo MCA" style="height:48px; display:block;">
+        <div style="color:var(--muted)">Comercial.mcaacademy@gmail.com · +258 853 915 824</div>
+        <div style="color:var(--muted)">© MCA Academy — Todos os direitos reservados</div>
+        <div style="margin-top:8px; font-size:13px; color:var(--muted)">Desenvolvido por <strong>Hermanio Cuamba</strong> — hermaniocuamba2@gmail.com · +258 855 943 975</div>
       </div>
-
-      <div class="small">
-        <h4 style="margin:0 0 6px 0">Contacto</h4>
-        <div>Email: Comercial.mcaacademy@gmail.com</div>
-        <div>WhatsApp: +258 853 915 824</div>
-      </div>
-
-      <div class="small">
-        <h4 style="margin:0 0 6px 0">Desenvolvido por</h4>
-        <div>Hermanio Cuamba</div>
-        <div>hermaniocuamba2@gmail.com</div>
-        <div>+258 855 943 975</div>
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top:14px; opacity:.9; font-size:13px">
-      © MCA Academy — Todos os direitos reservados
     </div>
   </footer>
 
-  <!-- FAB WhatsApp -->
-  <div class="fab-wa" id="fabWa" title="Falar no WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Floating WhatsApp button -->
+  <div class="fab" id="fab" title="Falar no WhatsApp" aria-hidden="false">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M20.52 3.478A11.911 11.911 0 0012.001 0C5.373 0 .001 5.373.001 12 0 13.99.371 15.89 1.077 17.63L0 24l6.53-1.068A11.924 11.924 0 0012 24c6.627 0 12-5.373 12-12 0-1.995-.447-3.874-1.48-5.522zM12 22.001c-.971 0-1.926-.134-2.835-.397L4.8 21.263l.55-3.127A9.916 9.916 0 012 12c0-5.523 4.477-10 10-10 5.523 0 10 4.477 10 10s-4.477 10-10 10z"/>
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.149-.672.15-.198.297-.768.966-.94 1.165-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.372-.025-.521-.075-.149-.672-1.612-.921-2.207-.243-.579-.487-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487 0 0 .377.15.675.074.298-.074 1.758-.719 2.007-1.415.248-.697.248-1.293.173-1.415-.074-.123-.272-.198-.57-.347z"/>
     </svg>
   </div>
 
   <script>
-    // Configuration (use the MCA Academy WhatsApp number)
-    const MCA_WHATSAPP = "258853915824"; // without plus and punctuation
-    const HERO_MESSAGE = "Olá! 👋 Estou interessado(a) em saber mais sobre os cursos da MCA Academy. Pode me ajudar, por favor?";
+    /* ====== Configuration ====== */
+    const MCA_WHATSAPP = "258853915824"; // international no plus
+    const HERO_MSG = "Olá! 👋 Estou interessado(a) em saber mais sobre os cursos da MCA Academy. Pode me ajudar, por favor?";
 
-    // helper to open WhatsApp web/mobile with encoded message
-    function openWhatsApp(message, phone = MCA_WHATSAPP) {
+    function openWhatsApp(message, phone = MCA_WHATSAPP){
       const encoded = encodeURIComponent(message);
       const url = `https://wa.me/${phone}?text=${encoded}`;
       window.open(url, "_blank");
     }
 
-    // Hero button
-    document.getElementById('hero-wa').addEventListener('click', function(){
-      openWhatsApp(HERO_MESSAGE);
-    });
+    // Hero CTA and FAB
+    document.getElementById('ctaWhats').addEventListener('click', () => openWhatsApp(HERO_MSG));
+    document.getElementById('fab').addEventListener('click', () => openWhatsApp(HERO_MSG));
+    document.getElementById('openNow').addEventListener('click', () => openWhatsApp(HERO_MSG));
+    document.getElementById('quickContact').addEventListener('click', (e) => { e.preventDefault(); openWhatsApp(HERO_MSG); });
+    document.getElementById('navContactBtn').addEventListener('click', () => { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); });
 
-    // Floating FAB
-    document.getElementById('fabWa').addEventListener('click', function(){
-      openWhatsApp(HERO_MESSAGE);
-    });
-
-    // Contact quick link in form
-    document.getElementById('contactWa').addEventListener('click', function(e){
-      e.preventDefault();
-      openWhatsApp(HERO_MESSAGE);
-    });
-
-    // Open WhatsApp now button
-    document.getElementById('openWaBtn').addEventListener('click', function(){
-      openWhatsApp(HERO_MESSAGE);
-    });
-
-    // Form submission: build a message with the fields and open WhatsApp
+    // Form submission -> Whatsapp with formatted message
     document.getElementById('leadForm').addEventListener('submit', function(e){
       e.preventDefault();
-      const name = document.getElementById('name').value.trim() || "-";
-      const course = document.getElementById('course').value.trim() || "-";
-      const email = document.getElementById('email').value.trim() || "-";
-      const phone = document.getElementById('phone').value.trim() || "-";
-      const message = document.getElementById('message').value.trim() || "-";
+      const name = (document.getElementById('name').value || "-").trim();
+      const course = (document.getElementById('course').value || "-").trim();
+      const email = (document.getElementById('email').value || "-").trim();
+      const phone = (document.getElementById('phone').value || "-").trim();
+      const message = (document.getElementById('message').value || "-").trim();
 
-      // Build the message; note line breaks are encoded by encodeURIComponent in openWhatsApp
-      const final = [
+      const lines = [
         "Olá! Aqui estão as informações do novo interessado(a):",
         "",
         "• Nome: " + name,
@@ -389,23 +319,31 @@
         "Gostaria de receber mais informações sobre este curso. Obrigado(a)!"
       ].join("\n");
 
-      openWhatsApp(final);
+      openWhatsApp(lines);
     });
 
-    // Small: reveal animations for fade-up elements (simple)
+    /* ====== Simple reveal animations ====== */
     (function(){
-      const els = document.querySelectorAll('.fade-up');
-      const io = new IntersectionObserver((entries) => {
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if(entry.isIntersecting){
-            entry.target.style.animationPlayState = 'running';
-            entry.target.classList.remove('fade-up');
-            entry.target.style.opacity = 1;
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
           }
         });
       }, {threshold:0.12});
       els.forEach(el => io.observe(el));
     })();
+
+    /* ====== Improve mobile UX for WhatsApp deep link (try to open app) ====== */
+    // no extra code needed; wa.me will open app on mobile if available
+
+    /* ====== Accessibility small tweaks ====== */
+    // ensure focus outlines for keyboard users
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Tab') document.body.classList.add('show-focus');
+    });
   </script>
 </body>
 </html>
